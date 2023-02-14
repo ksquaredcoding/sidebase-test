@@ -5,6 +5,18 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@huntersofbook/naive-ui-nuxt'
   ],
+  auth: {
+    isEnabled: false,
+    origin: 'http://localhost:3000',
+    basePath: '/api/auth',
+    enableSessionRefreshPeriodically: false,
+    enableSessionRefreshOnWindowFocus: true,
+    enableGlobalAppMiddleware: false,
+    defaultProvider: undefined,
+    globalMiddlewareOptions: {
+      allow404WithoutAuth: true
+    }
+  },
   build: {
     transpile: [
       'trpc-nuxt'
