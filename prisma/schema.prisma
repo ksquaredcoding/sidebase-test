@@ -14,23 +14,26 @@ datasource db {
 }
 
 model Products {
-  id          Int    @id @default(autoincrement())
-  name        String
-  description String
-  price       Int
+  id             Int            @id @default(autoincrement())
+  name           String
+  description    String
+  price          Int
+  vendingMachine VendingMachine @relation(fields: [machineId], references: [id])
+  machineId      String
 }
 
 model VendingMachine {
-  id              String   @id @default(uuid())
-  totalSales      Int      @default(0)
+  id              String     @id @default(uuid())
+  totalSales      Float      @default(0)
   availableChange Change[]
   productSlots    Int
+  Products        Products[]
 }
 
 model Change {
   id             Int            @id @default(autoincrement())
-  type           String
-  quantity       Int
+  value          Decimal        @default(0.25)
+  quantity       Int            @default(100)
   vendingMachine VendingMachine @relation(fields: [machineId], references: [id])
   machineId      String
 }

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     '@huntersofbook/naive-ui-nuxt'
   ],
   auth: {
-    isEnabled: false,
+    isEnabled: true,
     origin: 'http://localhost:3000',
     basePath: '/api/auth',
     enableSessionRefreshPeriodically: false,

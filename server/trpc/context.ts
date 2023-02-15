@@ -6,14 +6,7 @@ import type { H3Event } from 'h3'
  * @link https://trpc.io/docs/context
  */
 export function createContext (_event: H3Event) {
-  /**
-   * Add any trpc-request context here. E.g., you could add `prisma` like this (if you've added it via sidebase):
-   * ```ts
-   * return { prisma: _event.context.prisma }
-   * ```
-   */
-  return {}
+  return { prisma: _event.context.prisma }
 }
 
 export type Context = inferAsyncReturnType<typeof createContext>
-// TODO set up API endpoints here
