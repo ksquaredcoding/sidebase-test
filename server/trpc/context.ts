@@ -16,3 +16,4 @@ export function createContext (_event: H3Event) {
 }
 
 export type Context = inferAsyncReturnType<typeof createContext>
+// TODO set up API endpoints here
