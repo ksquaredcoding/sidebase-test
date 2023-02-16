@@ -18,6 +18,7 @@ model Products {
   name           String
   description    String
   price          Int
+  quantity       Int            @default(0)
   vendingMachine VendingMachine @relation(fields: [machineId], references: [id])
   machineId      String
 }

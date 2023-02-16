@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const { $client } = useNuxtApp()
+// REVIEW how to make API call this call on postman is /api/trpc/products.getProducts
+const products = (await $client.products.getProducts.query()).data
+</script>
 <template>
   <div class="main-container">
     <div class="heading">
@@ -6,7 +11,7 @@
       </h1>
       <p class="heading__credits">
         Read our documentation <a href="https://sidebase.io/sidebase/welcome" target="_blank">here</a>.
-        Get started in no time with the following amazing modules:
+        {{ products }}
       </p>
     </div>
     <div class="cards">

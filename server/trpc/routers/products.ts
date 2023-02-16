@@ -1,13 +1,10 @@
-import { PrismaClient, Products } from '@prisma/client'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
 import { publicProcedure, router } from '../trpc'
 
-const prisma = new PrismaClient()
-
 export const productsRouter = router({
-  getProducts: publicProcedure.query(async () => {
-    const products = await prisma.products.findMany()
+  getProducts: publicProcedure.query(async (req) => {
+    const products = await req.ctx.prisma.products.findMany()
     if (!products) {
       return {
         type: 'error',
@@ -22,11 +19,14 @@ export const productsRouter = router({
 
   createProduct: publicProcedure
     .input(z.object({
-      id: z.number(),
       name: z.string(),
-      description: z.string().nullish(),
+      description: z.string(),
       price: z.number(),
       machineId: z.string()
-    })satisfies z.Schema<Products>)
+    }))
+    .mutation(async (req) => {
+      const product = await req.ctx.prisma.products.create({ data: req.input })
+      return product
+    })
 
 })
