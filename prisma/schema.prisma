@@ -26,15 +26,7 @@ model Products {
 model VendingMachine {
   id              String     @id @default(uuid())
   totalSales      Float      @default(0)
-  availableChange Change[]
+  availableChange Int
   productSlots    Int
   Products        Products[]
-}
-
-model Change {
-  id             Int            @id @default(autoincrement())
-  value          Decimal        @default(0.25)
-  quantity       Int            @default(100)
-  vendingMachine VendingMachine @relation(fields: [machineId], references: [id])
-  machineId      String
 }
